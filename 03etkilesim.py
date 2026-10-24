@@ -1,0 +1,40 @@
+import os
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+file_path = os.path.abspath("kurs.html")
+
+driver = webdriver.Chrome()
+driver.get(file_path)
+
+time.sleep(1)
+
+# class => 
+# . id => # 
+# tag => tagname 
+# cards = driver.find_elements(By.CLASS_NAME, "course-card")
+cards = driver.find_elements(By.CSS_SELECTOR, ".course-card")
+
+cards[0].click()
+time.sleep(2)
+driver.switch_to.alert.accept()
+
+user_input = driver.find_element(By.ID, "username")
+user_input.send_keys("Selenium Kullanıcısı")
+time.sleep(2)
+btn = driver.find_element(By.ID, "submit-btn")
+btn.click()
+driver.switch_to.alert.accept()
+
+user_input.clear()
+time.sleep(2)
+user_input.send_keys("sadikturan")
+time.sleep(2)
+driver.find_element(By.ID, "password").send_keys("123456")
+btn.click()
+driver.switch_to.alert.accept()
+
+time.sleep(3)
+
+driver.quit()
